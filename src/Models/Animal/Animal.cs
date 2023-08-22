@@ -17,5 +17,9 @@ namespace SuperPets.Models.Animal
         public string? Vaccines { get; set; }
         public bool Castration { get; set; }
         public string? Photo { get; set; }
+        public required string CreatedBy { get; set; }
+        public DateTime CreatedOn { get; set; }
+        public required string UpdatedBy { get; set; }
+        public DateTime UpdatedOn { get; set; }
     }
 }

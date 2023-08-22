@@ -38,6 +38,24 @@ namespace SuperPets.Data.EntityConfiguration
                 .Property(p => p.Size)
                 .IsRequired();
 
+           builder
+                .Property(p => p.Local)
+                .IsRequired();
+
+          builder
+                .Property(p => p.Vaccines)
+                .IsRequired()
+                .HasColumnType("varchar(max)");
+
+            builder
+                .Property(p => p.Castration)
+                .IsRequired()
+                .HasColumnType("bool");
+
+           builder
+                .Property(p => p.Photo)
+                .IsRequired();
+
             builder
                 .ToTable("Animals");
         }
