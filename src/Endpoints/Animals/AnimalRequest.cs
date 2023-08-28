@@ -1,0 +1,9 @@
+﻿using SuperPets.Domain.Animals;
+
+namespace SuperPets.Endpoints.Animals
+{
+    public class AnimalRequest : Animal
+    {
+
+    }
+}

@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using SuperPets.Models.Animal;
+using SuperPets.Domain.Animals;
 
 namespace SuperPets.Data
 {

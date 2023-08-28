@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using SuperPets.Models.Animal;
+using SuperPets.Domain.Animals;
 
 namespace SuperPets.Data.EntityConfiguration
 {
@@ -22,39 +22,20 @@ namespace SuperPets.Data.EntityConfiguration
 
             builder
                 .Property(p => p.Species)
-                .IsRequired()
                 .HasColumnType("varchar(20)");
 
             builder
                 .Property(p => p.Gender)
-                .IsRequired()
                 .HasColumnType("varchar(10)");
 
             builder
-                .Property(p => p.Age)
-                .IsRequired();
-
-            builder
-                .Property(p => p.Size)
-                .IsRequired();
-
-           builder
-                .Property(p => p.Local)
-                .IsRequired();
-
-          builder
                 .Property(p => p.Vaccines)
-                .IsRequired()
                 .HasColumnType("varchar(max)");
 
             builder
                 .Property(p => p.Castration)
-                .IsRequired()
-                .HasColumnType("bool");
+                .HasColumnType("bit");
 
-           builder
-                .Property(p => p.Photo)
-                .IsRequired();
 
             builder
                 .ToTable("Animals");

@@ -1,4 +1,4 @@
-﻿namespace SuperPets.Models.Animal
+﻿namespace SuperPets.Domain.Animals
 {
     public class AnimalSize
     {
