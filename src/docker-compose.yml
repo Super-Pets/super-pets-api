@@ -12,7 +12,7 @@ services:
   sqldata:
     image: mcr.microsoft.com/mssql/server:2019-latest
     environment:
-     - SA_PASSWORD:SuperPets@)@#2023
-     - ACCEPT_EULA=Y
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=SuperPets2023
     ports:
      - "1450:1433"
