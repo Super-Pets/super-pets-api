@@ -4,6 +4,7 @@ using SuperPets.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddSqlServer<AppDbContext>(builder.Configuration["ConnectionString:SuperPetsDB"]);
+builder.Services.AddCors();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -19,6 +20,8 @@ if (app.Environment.IsDevelopment())
 DatabaseManagementService.MigrationInitialization(app);
 
 app.UseHttpsRedirection();
+app.UseCors(builder => builder.AllowAnyOrigin());
+app.UseCors(builder => builder.AllowAnyHeader());
 
 app.MapMethods(AnimalPost.Template, AnimalPost.Methods, AnimalPost.Handle);
 app.MapMethods(AnimalGet.Template, AnimalGet.Methods, AnimalGet.Handle);
