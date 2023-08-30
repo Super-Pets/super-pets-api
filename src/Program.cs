@@ -2,9 +2,21 @@ using SuperPets.Data;
 using SuperPets.Endpoints.Animals;
 using SuperPets.Services;
 
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddSqlServer<AppDbContext>(builder.Configuration["ConnectionString:SuperPetsDB"]);
-builder.Services.AddCors();
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: MyAllowSpecificOrigins,
+        policy =>
+        {
+            policy.WithOrigins("http://localhost:8081",
+                "http://localhost:4200")
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+        });
+});
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -20,9 +32,7 @@ if (app.Environment.IsDevelopment())
 DatabaseManagementService.MigrationInitialization(app);
 
 app.UseHttpsRedirection();
-app.UseCors(builder => builder.AllowAnyOrigin());
-app.UseCors(builder => builder.AllowAnyHeader());
-app.UseCors(builder => builder.AllowAnyMethod());
+app.UseCors(MyAllowSpecificOrigins);
 
 app.MapMethods(AnimalPost.Template, AnimalPost.Methods, AnimalPost.Handle);
 app.MapMethods(AnimalGet.Template, AnimalGet.Methods, AnimalGet.Handle);
