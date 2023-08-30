@@ -22,6 +22,7 @@ DatabaseManagementService.MigrationInitialization(app);
 app.UseHttpsRedirection();
 app.UseCors(builder => builder.AllowAnyOrigin());
 app.UseCors(builder => builder.AllowAnyHeader());
+app.UseCors(builder => builder.AllowAnyMethod());
 
 app.MapMethods(AnimalPost.Template, AnimalPost.Methods, AnimalPost.Handle);
 app.MapMethods(AnimalGet.Template, AnimalGet.Methods, AnimalGet.Handle);
