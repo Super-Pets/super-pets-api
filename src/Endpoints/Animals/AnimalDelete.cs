@@ -7,10 +7,10 @@ namespace SuperPets.Endpoints.Animals
     public class AnimalDelete
     {
         public static string Template => "/animals/{id}";
-        public static string[] Methods => new string[] { HttpMethod.Put.ToString() };
+        public static string[] Methods => new string[] { HttpMethod.Delete.ToString() };
         public static Delegate Handle => Action;
 
-        public static IResult Action([FromRoute] int id, AnimalRequest animalRequest, AppDbContext context)
+        public static IResult Action([FromRoute] int id, AppDbContext context)
         {
             var animal = context.Animals.Find(id);
 

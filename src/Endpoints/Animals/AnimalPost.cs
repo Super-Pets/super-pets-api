@@ -1,4 +1,5 @@
-﻿using SuperPets.Data;
+﻿using Microsoft.AspNetCore.Mvc;
+using SuperPets.Data;
 using SuperPets.Domain.Animals;
 
 namespace SuperPets.Endpoints.Animals
@@ -9,7 +10,7 @@ namespace SuperPets.Endpoints.Animals
         public static string[] Methods => new string[] { HttpMethod.Post.ToString() };
         public static Delegate Handle => Action;
 
-        public static IResult Action(AnimalRequest animalRequest, AppDbContext context)
+        public static IResult Action([FromBody] AnimalRequest animalRequest, AppDbContext context)
         {
             var animal = new Animal
             {

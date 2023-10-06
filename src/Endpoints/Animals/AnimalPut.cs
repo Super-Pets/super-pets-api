@@ -10,28 +10,16 @@ namespace SuperPets.Endpoints.Animals
         public static string[] Methods => new string[] { HttpMethod.Put.ToString() };
         public static Delegate Handle => Action;
 
-        public static IResult Action([FromRoute] int id, AnimalRequest animalRequest, AppDbContext context)
+        public static IResult Action([FromRoute] int id, [FromBody] AnimalRequest animalRequest, AppDbContext context)
         {
-            var animal = context.Animals.Where(a => a.Id == id).FirstOrDefault();
+            var animal = context.Animals.Find(id);
 
-            if (animal != null)
+            if(animal != null)
             {
-                animal.Name = animalRequest.Name;
-                animal.Description = animalRequest.Description;
-                animal.Vaccines = animalRequest.Vaccines;
-                animal.Species = animalRequest.Species;
-                animal.Age = animalRequest.Age;
-                animal.Gender = animalRequest.Gender;
-                animal.Castration = animalRequest.Castration;
-                animal.Local = animalRequest.Local;
-                animal.Photo = animalRequest.Photo;
-                animal.Size = animalRequest.Size;
-
-                context.SaveChanges();
-                return Results.Ok();
+                context.Animals.Update(animalRequest);
+                var result = context.SaveChanges();
             }
-
-            throw new Exception("Animal não encontrado.");
+            return Results.Ok();
         }
     }
 }
